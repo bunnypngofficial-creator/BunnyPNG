@@ -6,339 +6,145 @@
     <title>BunnyPNG - Free Transparent PNG Images</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ============================================
-           CSS RESET & BASE STYLES
-           ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary-yellow: #FFD700;
-            --primary-yellow-glow: rgba(255, 215, 0, 0.4);
             --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
             --card-bg: #111111;
-            --card-hover: #1a1a1a;
             --text-white: #ffffff;
             --text-gray: #b0b0b0;
             --border-color: #222222;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-white);
-            overflow-x: hidden;
             line-height: 1.6;
         }
-
-        /* ============================================
-           FLOATING PARTICLES BACKGROUND
-           ============================================ */
-        .particles-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary-yellow);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: floatParticle linear infinite;
-        }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
-        }
-
-        /* ============================================
-           STICKY NAVBAR
-           ============================================ */
         .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            padding: 15px 0;
-            transition: all 0.3s ease;
+            padding: 15px 25px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .navbar.scrolled { box-shadow: 0 4px 30px rgba(255, 215, 0, 0.1); }
-
-        .nav-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-
-        .logo .bunny { color: var(--text-white); }
+        .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; }
+        .logo .bunny { color: white; }
         .logo .png { color: var(--primary-yellow); }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            margin-right: 8px;
-            background: linear-gradient(135deg, var(--primary-yellow), #ffaa00);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .nav-links { display: flex; gap: 35px; list-style: none; }
-        .nav-links a {
-            color: var(--text-gray);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover { color: var(--primary-yellow); }
-
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
-        .hamburger span { width: 28px; height: 3px; background: var(--text-white); border-radius: 3px; }
-
-        /* ============================================
-           HERO SECTION
-           ============================================ */
-        .hero {
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 25px 60px;
-            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.03) 0%, transparent 70%);
-        }
-
-        .hero-logo { font-size: 4.5rem; font-weight: 800; margin-bottom: 10px; }
-        .hero-logo .png { color: var(--primary-yellow); }
-        .hero-tagline { font-size: 1.3rem; color: var(--text-gray); margin-bottom: 40px; }
-
-        .search-container { position: relative; max-width: 600px; margin: 0 auto 40px; }
+        .hero { text-align: center; padding: 80px 25px; }
+        .search-container { max-width: 500px; margin: 20px auto; width: 100%; }
         .search-input {
-            width: 100%; padding: 18px 25px; border: 2px solid var(--border-color);
-            border-radius: 50px; background: rgba(255, 255, 255, 0.03); color: white; outline: none;
+            width: 100%; padding: 12px 20px; border: 2px solid var(--border-color);
+            border-radius: 50px; background: rgba(255, 255, 255, 0.05); color: white; outline: none;
         }
-        .search-input:focus { border-color: var(--primary-yellow); box-shadow: 0 0 20px var(--primary-yellow-glow); }
-
-        /* ============================================
-           PNG GRID SECTION
-           ============================================ */
-        .section { padding: 80px 25px; }
-        .container { max-width: 1300px; margin: 0 auto; }
-        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 40px; }
-        .section-title span { color: var(--primary-yellow); }
-
+        .section { padding: 40px 25px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 2rem; text-align: center; margin-bottom: 40px; }
         .png-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
         }
-
         .png-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.4s ease;
+            background: var(--card-bg); border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border-color); transition: 0.3s; padding: 15px; text-align: center;
         }
-
-        .png-card:hover { transform: translateY(-5px); border-color: var(--primary-yellow); }
-
-        .png-image-wrapper {
-            height: 220px; background: #151515;
-            display: flex; align-items: center; justify-content: center; overflow: hidden;
-        }
-
-        .png-image-wrapper img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
-
-        .png-info { padding: 20px; text-align: center; }
-        .png-title { font-size: 1rem; margin-bottom: 15px; }
-
+        .png-card:hover { border-color: var(--primary-yellow); }
+        .png-image-wrapper { height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+        .png-image-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .png-title { font-size: 0.9rem; margin-bottom: 15px; height: 35px; overflow: hidden; }
         .download-btn {
-            display: inline-block; padding: 10px 25px;
-            background: var(--primary-yellow); color: var(--dark-bg);
-            text-decoration: none; font-weight: 700; border-radius: 30px; transition: 0.3s;
+            display: inline-block; padding: 8px 18px; background: var(--primary-yellow);
+            color: #000; text-decoration: none; font-weight: 700; border-radius: 20px; font-size: 0.85rem;
         }
-
-        .download-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary-yellow-glow); }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer { background: var(--darker-bg); padding: 60px 25px; border-top: 3px solid var(--primary-yellow); text-align: center; }
-        .footer-bottom { margin-top: 20px; color: var(--text-gray); font-size: 0.9rem; }
-
-        /* Loader */
-        .loader-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-bg); z-index: 3000; display: flex; align-items: center; justify-content: center; }
-        .loader-overlay.hidden { opacity: 0; visibility: hidden; transition: 0.5s; }
-        .loader { width: 50px; height: 50px; border: 5px solid #222; border-top-color: var(--primary-yellow); border-radius: 50%; animation: spin 1s linear infinite; }
+        .loader { width: 40px; height: 40px; border: 4px solid #222; border-top-color: var(--primary-yellow); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="loader-overlay" id="loader"><div class="loader"></div></div>
-    <div class="particles-container" id="particles"></div>
-
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <span class="logo-icon">&#128048;</span>
-                <span class="bunny">Bunny</span><span class="png">PNG</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#trending">Trending</a></li>
-                <li><a href="https://xbunnypng.blogspot.com" target="_blank">Blog</a></li>
-            </ul>
-        </div>
+    <nav class="navbar">
+        <a href="#" class="logo"><span class="bunny">Bunny</span><span class="png">PNG</span></a>
+        <div style="font-size: 0.8rem; color: var(--text-gray);">xbunnypng.blogspot.com</div>
     </nav>
 
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-logo"><span class="bunny">Bunny</span><span class="png">PNG</span></div>
-            <p class="hero-tagline">High Quality Transparent PNG Images from xbunnypng</p>
-            <div class="search-container">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search images...">
-            </div>
+    <section class="hero">
+        <h1 style="font-size: 2.5rem;">Free <span style="color:var(--primary-yellow)">PNG</span> Assets</h1>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search images...">
         </div>
     </section>
 
-    <section class="section" id="trending">
-        <div class="container">
-            <h2 class="section-title">Latest <span>PNG Images</span></h2>
-            <div class="png-grid" id="pngGrid">
-                <p style="text-align:center; grid-column: 1/-1;">Loading awesome PNGs...</p>
-            </div>
-        </div>
+    <section class="section">
+        <h2 class="section-title">Latest Images</h2>
+        <div id="loader" class="loader"></div>
+        <div class="png-grid" id="pngGrid"></div>
     </section>
-
-    <footer class="footer">
-        <div class="logo">
-            <span class="bunny" style="color:white">Bunny</span><span class="png">PNG</span>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 BunnyPNG. Powered by Blogger. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
-        // --- CONFIGURATION ---
-        const blogURL = "https://xbunnypng.blogspot.com"; 
+        // *** වෙනස් කළ යුතු ප්‍රධාන ලින්ක් එක ***
+        const blogName = "xbunnypng"; 
 
-        // 1. Loader Hide
-        window.addEventListener('load', () => {
-            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1000);
-        });
-
-        // 2. Fetch Data from Blogger
-        async function fetchBloggerData() {
+        async function loadImages() {
             const pngGrid = document.getElementById('pngGrid');
+            const loader = document.getElementById('loader');
+
             try {
-                // Fetching JSON feed from your blog
-                const response = await fetch(`${blogURL}/feeds/posts/default?alt=json&max-results=20`);
-                const data = await response.json();
+                // v2 JSON Feed එක භාවිතා කිරීම (CORS ප්‍රශ්න අවමයි)
+                const response = await fetch(`https://${blogName}.blogspot.com/feeds/posts/default?alt=json-in-script&callback=handleResponse`);
+                const scriptText = await response.text();
+                
+                // callback එක හරහා එන දත්ත තේරුම් ගැනීම
+                const jsonString = scriptText.substring(scriptText.indexOf('handleResponse(') + 15, scriptText.lastIndexOf(');'));
+                const data = JSON.parse(jsonString);
                 const posts = data.feed.entry;
 
-                pngGrid.innerHTML = ''; // Clear loading message
+                loader.style.display = 'none';
+                pngGrid.innerHTML = '';
 
-                if(!posts) {
-                    pngGrid.innerHTML = "<p>No posts found. Add some images to your Blogger!</p>";
+                if (!posts) {
+                    pngGrid.innerHTML = "<p>No posts found!</p>";
                     return;
                 }
 
                 posts.forEach(post => {
                     const title = post.title.$t;
-                    const postLink = post.link.find(l => l.rel === 'alternate').href;
+                    const link = post.link.find(l => l.rel === 'alternate').href;
                     
-                    // Get High Res Image
                     let imgUrl = "";
                     if (post.media$thumbnail) {
-                        imgUrl = post.media$thumbnail.url.replace('s72-c', 's1600'); 
+                        imgUrl = post.media$thumbnail.url.replace('s72-c', 's1600');
+                    } else if (post.content && post.content.$t.includes("<img")) {
+                        const srcMatch = post.content.$t.match(/src="([^"]+)"/);
+                        if (srcMatch) imgUrl = srcMatch[1];
                     }
 
-                    const card = `
-                        <div class="png-card">
-                            <div class="png-image-wrapper">
-                                <img src="${imgUrl}" alt="${title}">
-                            </div>
-                            <div class="png-info">
+                    if (imgUrl) {
+                        pngGrid.innerHTML += `
+                            <div class="png-card">
+                                <div class="png-image-wrapper"><img src="${imgUrl}" alt="${title}"></div>
                                 <h3 class="png-title">${title}</h3>
-                                <a href="${postLink}" class="download-btn" target="_blank">Download PNG</a>
+                                <a href="${link}" class="download-btn" target="_blank">Download</a>
                             </div>
-                        </div>
-                    `;
-                    pngGrid.innerHTML += card;
+                        `;
+                    }
                 });
-            } catch (error) {
-                console.error("Error:", error);
-                pngGrid.innerHTML = "<p>Failed to load images. Make sure Blog Feed is enabled in Blogger Settings.</p>";
+            } catch (e) {
+                loader.style.display = 'none';
+                pngGrid.innerHTML = "<p>Error loading images. Please ensure your Blog Feed is set to 'Full' in Blogger Settings.</p>";
+                console.error(e);
             }
         }
 
-        // 3. Search Filter (Basic)
         document.getElementById('searchInput').addEventListener('input', function(e) {
             const term = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.png-card');
-            cards.forEach(card => {
+            document.querySelectorAll('.png-card').forEach(card => {
                 const title = card.querySelector('.png-title').textContent.toLowerCase();
                 card.style.display = title.includes(term) ? 'block' : 'none';
             });
         });
 
-        // 4. Particles Background
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 20; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                p.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(p);
-            }
-        }
-
-        createParticles();
-        fetchBloggerData();
+        loadImages();
     </script>
 </body>
 </html>
