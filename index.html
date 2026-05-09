@@ -59,7 +59,6 @@
         }
         .png-card:hover { border-color: var(--primary-yellow); transform: translateY(-5px); }
 
-        /* Professional Checkerboard Background */
         .png-image-wrapper { 
             height: 200px; 
             display: flex; 
@@ -118,6 +117,8 @@
 
     <script>
         const blogName = "xbunnypng"; 
+        // ඔයා Blogger එකේ හදපු අලුත් Page එකේ ලින්ක් එක මෙතනට දෙන්න
+        const bloggerDownloadPage = "https://xbunnypng.blogspot.com/p/download.html";
 
         function handleResponse(data) {
             const pngGrid = document.getElementById('pngGrid');
@@ -128,13 +129,12 @@
             pngGrid.innerHTML = '';
 
             if (!posts) {
-                pngGrid.innerHTML = "<p style='grid-column: 1/-1; text-align:center;'>No PNGs found in Blogger!</p>";
+                pngGrid.innerHTML = "<p style='grid-column: 1/-1; text-align:center;'>No PNGs found!</p>";
                 return;
             }
 
             posts.forEach(post => {
                 const title = post.title.$t;
-                const link = post.link.find(l => l.rel === 'alternate').href;
                 
                 let imgUrl = "";
                 if (post.media$thumbnail) {
@@ -145,11 +145,14 @@
                 }
 
                 if (imgUrl) {
+                    // මෙතනදී තමයි Blogger Download Page එකට දත්ත යවන ලින්ක් එක හැදෙන්නේ
+                    const finalDownloadLink = `${bloggerDownloadPage}?img=${encodeURIComponent(imgUrl)}&name=${encodeURIComponent(title)}`;
+
                     pngGrid.innerHTML += `
                         <div class="png-card">
                             <div class="png-image-wrapper"><img src="${imgUrl}" alt="${title}"></div>
                             <h3 class="png-title">${title}</h3>
-                            <a href="${link}" class="download-btn" target="_blank">Download</a>
+                            <a href="${finalDownloadLink}" class="download-btn" target="_blank">Download</a>
                         </div>
                     `;
                 }
